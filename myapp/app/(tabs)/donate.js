@@ -10,7 +10,21 @@ export default function TabDonateScreen() {
   const [name, setName] = useState('');
 
   function onSubmit() {
-    alert(`Merci ${name} pour votre don de ${donation} €`);
+    if (donation == 0 && name == '') {
+      alert('Veuillez saisir un montant et un nom');
+      return;
+    } else if(donation < 5) {
+      alert('Soit pas radin, donne au moins 5€')
+      return;
+    } else if(name == '') {
+      alert('Veuillez saisir un nom');
+      return;
+    } else {
+      alert(`Merci ${name} pour votre don de ${donation} €`);
+    }
+
+    setDonation(0);
+    setName('');
   };
 
   return(
@@ -23,45 +37,27 @@ export default function TabDonateScreen() {
         </Text>
 
         <View style={styles.formContainer}>
-          <Controller
-            control={control}
-            render={({ field }) => (
-              <TextInput
-                id="amount"
-                onChangeText={setDonation}
-                style={styles.input}
-                placeholder="Montant du don"
-                value={donation}
-                keyboardType='numeric'
-                {...field}
-              />
-            )}
-            name="amount"
-            rules={{ required: 'Sois pas radin', type: 'number'}}
+          <TextInput
+            id="amount"
+            onChangeText={(value) => setDonation(value)}
+            style={styles.input}
+            placeholder="Montant du don"
+            value={donation}
+            keyboardType='numeric'
           />
 
-          <Controller
-            control={control}
-            render={({ field }) => (
-              <TextInput
-                id="name"
-                style={styles.input}
-                placeholder="Ton nom pour te retrouver"
-                onChangeText={setName}
-                value={name}
-                {...field}
-              />
-            )}
-            name="name"
-            rules={{ required: 'Aie confiance !!', type: 'string'}}
+          <TextInput
+            id="name"
+            style={styles.input}
+            placeholder="Ton nom pour te retrouver"
+            onChangeText={(text) => setName(text)}
+            value={name}
           />
           
           <Button 
             title="Submit"
             onPress={() => {
               onSubmit();
-              setDonation(0);
-              setName('');
             }} />     
         </View>
       </ScrollView>
