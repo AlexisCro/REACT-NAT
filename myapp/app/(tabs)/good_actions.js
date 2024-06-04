@@ -30,7 +30,7 @@ export default function TabActionsScreen() {
   // Add action to the list
   function addAction() {
     if (action != "") {
-      setActions((prevActions) => [..prevActions, action]);
+      setActions((prevActions) => [...prevActions, action]);
     } else {
       alert('Veuillez saisir une action');
     }
