@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 
 export default function TabLayout() {
@@ -27,6 +28,14 @@ export default function TabLayout() {
         options={{ 
           title: "Dons",
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="money" color={ color } /> 
+        }} 
+      />
+
+      <Tabs.Screen
+        name="good_actions"
+        options={{ 
+          title: "Mes actions",
+          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="pending-actions" color={ color } /> 
         }} 
       />
 
@@ -77,5 +86,12 @@ export const styles = StyleSheet.create({
     padding: 10,
     width: 400,
     textAlign: 'center'
+  },
+  input: {
+    margin: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff'
   }
 });

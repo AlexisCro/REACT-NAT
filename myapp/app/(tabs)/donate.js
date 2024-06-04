@@ -2,18 +2,15 @@ import { View, Text, StyleSheet, TextInput, Button, SafeAreaView, ScrollView } f
 import { styles } from './_layout';
 import React from 'react';
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useForm, Controller, set } from 'react-hook-form';
 
 export default function TabDonateScreen() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, formState: { errors } } = useForm();
   const [donation, setDonation] = useState(0);
   const [name, setName] = useState('');
 
-  const onSubmit = data => {
+  function onSubmit() {
     alert(`Merci ${name} pour votre don de ${donation} €`);
-    setDonation('');
-    setName('');
   };
 
   return(
@@ -32,8 +29,10 @@ export default function TabDonateScreen() {
               <TextInput
                 id="amount"
                 onChangeText={setDonation}
-                style={customStyles.input}
+                style={styles.input}
                 placeholder="Montant du don"
+                value={donation}
+                keyboardType='numeric'
                 {...field}
               />
             )}
@@ -46,9 +45,10 @@ export default function TabDonateScreen() {
             render={({ field }) => (
               <TextInput
                 id="name"
-                style={customStyles.input}
+                style={styles.input}
                 placeholder="Ton nom pour te retrouver"
                 onChangeText={setName}
+                value={name}
                 {...field}
               />
             )}
@@ -56,7 +56,13 @@ export default function TabDonateScreen() {
             rules={{ required: 'Aie confiance !!', type: 'string'}}
           />
           
-          <Button title="Submit" onPress={onSubmit} />     
+          <Button 
+            title="Submit"
+            onPress={() => {
+              onSubmit();
+              setDonation(0);
+              setName('');
+            }} />     
         </View>
       </ScrollView>
     </SafeAreaView>
