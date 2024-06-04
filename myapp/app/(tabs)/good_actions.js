@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SafeAreaView, ScrollView, Text, View, TextInput, Button, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View, TextInput, Button, StyleSheet, Pressable } from 'react-native';
 import { styles } from './_layout';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function TabActionsScreen() {
   const [actions, setActions] = useState([]);
@@ -38,7 +39,7 @@ export default function TabActionsScreen() {
   }
 
   return (
-    <View>
+    <View style={styles.formContainer}>
       <Text>Mes actions</Text>
       <TextInput
         style={styles.input}
@@ -50,14 +51,40 @@ export default function TabActionsScreen() {
         title="Ajouter"
         onPress={addAction}
       />
-      <ScrollView>
-        {actions.map((action, index) => (
-          <View key={index}>
-            <Text>{action}</Text>
-            <Button title="Supprimer" onPress={() => deleteAction(index)}/>
-          </View>
-        ))}
-      </ScrollView>
+
+      <SafeAreaView style={{height: 500, paddingBottom: 30}}>
+        <ScrollView style={{marginTop: 40 }}>
+          {actions.map((action, index) => (
+            <View key={index} style={customStyles.action}>
+              <Text>{action}</Text>
+              <Pressable onPress={() => deleteAction(index)}>
+                <MaterialIcons size={25} name='delete' style={customStyles.btnDelete} />
+              </Pressable>
+            </View>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   )
 }
+
+const customStyles = StyleSheet.create({
+  action: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 15,
+    padding: 5,
+    alignItems: 'center'
+  },
+  btnDelete: {
+    backgroundColor: 'red',
+    color: 'white',
+    padding: 5,
+    borderRadius: 5
+  }
+
+})

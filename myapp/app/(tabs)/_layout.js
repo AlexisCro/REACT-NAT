@@ -93,5 +93,14 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     backgroundColor: '#fff'
+  },
+  formContainer: {
+    marginTop: 40,
+    padding: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 15,
+    padding: 30
   }
 });

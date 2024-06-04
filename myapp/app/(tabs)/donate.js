@@ -22,7 +22,7 @@ export default function TabDonateScreen() {
           Dons
         </Text>
 
-        <View style={customStyles.formContainer}>
+        <View style={styles.formContainer}>
           <Controller
             control={control}
             render={({ field }) => (
@@ -68,22 +68,3 @@ export default function TabDonateScreen() {
     </SafeAreaView>
   );
 }
-
-const customStyles = StyleSheet.create({
-  input: {
-    margin: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    backgroundColor: '#fff'
-  },
-  formContainer: {
-    marginTop: 40,
-    padding: 10,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 15,
-    padding: 30
-  }
-});
